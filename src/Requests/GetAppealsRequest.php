@@ -2,11 +2,12 @@
 
 namespace Astrotomic\FogTradeSdk\Requests;
 
-use Astrotomic\FogTradeSdk\Collections\AppealCollection;
+use Astrotomic\FogTradeSdk\Data\Appeal;
 use Astrotomic\FogTradeSdk\Enums\AppealState;
 use Sammyjo20\Saloon\Http\SaloonRequest;
 use Sammyjo20\Saloon\Http\SaloonResponse;
 use Sammyjo20\Saloon\Traits\Plugins\CastsToDto;
+use Spatie\LaravelData\DataCollection;
 
 class GetAppealsRequest extends SaloonRequest
 {
@@ -40,8 +41,8 @@ class GetAppealsRequest extends SaloonRequest
         ];
     }
 
-    protected function castToDto(SaloonResponse $response): AppealCollection
+    protected function castToDto(SaloonResponse $response): DataCollection
     {
-        return AppealCollection::fromArray($response->json('data'));
+        return new DataCollection(Appeal::class, $response->json('data'));
     }
 }

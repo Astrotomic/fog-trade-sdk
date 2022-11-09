@@ -5,16 +5,19 @@ namespace Astrotomic\FogTradeSdk\Data;
 use Astrotomic\FogTradeSdk\Enums\ReportState;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Str;
+use Spatie\LaravelData\Attributes\WithCast;
+use Spatie\LaravelData\Casts\DateTimeInterfaceCast;
+use Spatie\LaravelData\Data;
 use SteamID;
 use Symfony\Component\DomCrawler\Crawler;
 
-final class Report extends DataTransferObject
+final class Report extends Data
 {
     public function __construct(
         public readonly int $id,
         public readonly string $type,
-        public readonly string $victim, // ToDo
-        public readonly string $accused, // ToDo
+        public readonly string $victim,
+        public readonly string $accused,
         public readonly string $description,
         public readonly string $evidence,
         public readonly int $views,
@@ -24,11 +27,13 @@ final class Report extends DataTransferObject
         public readonly ?int $assignee_id,
         public readonly int $creator_id,
         public readonly int $modificator_id,
+        #[WithCast(DateTimeInterfaceCast::class, format: ['d.m.Y H:i:s', 'Y-m-d H:i:s'])]
         public readonly CarbonImmutable $created_at,
+        #[WithCast(DateTimeInterfaceCast::class, format: ['d.m.Y H:i:s', 'Y-m-d H:i:s'])]
         public readonly CarbonImmutable $updated_at,
-        public readonly string $state, // ToDo
-        public readonly string $assignee, // ToDo
-        public readonly string $last_reply, // ToDo
+        public readonly string $state,
+        public readonly string $assignee,
+        public readonly string $last_reply,
     ) {
     }
 

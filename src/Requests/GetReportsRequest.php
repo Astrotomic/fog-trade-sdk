@@ -2,11 +2,12 @@
 
 namespace Astrotomic\FogTradeSdk\Requests;
 
-use Astrotomic\FogTradeSdk\Collections\ReportCollection;
+use Astrotomic\FogTradeSdk\Data\Report;
 use Astrotomic\FogTradeSdk\Enums\ReportState;
 use Sammyjo20\Saloon\Http\SaloonRequest;
 use Sammyjo20\Saloon\Http\SaloonResponse;
 use Sammyjo20\Saloon\Traits\Plugins\CastsToDto;
+use Spatie\LaravelData\DataCollection;
 
 class GetReportsRequest extends SaloonRequest
 {
@@ -40,8 +41,8 @@ class GetReportsRequest extends SaloonRequest
         ];
     }
 
-    protected function castToDto(SaloonResponse $response): ReportCollection
+    protected function castToDto(SaloonResponse $response): DataCollection
     {
-        return ReportCollection::fromArray($response->json('data'));
+        return new DataCollection(Report::class, $response->json('data'));
     }
 }

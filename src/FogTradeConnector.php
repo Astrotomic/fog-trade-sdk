@@ -2,14 +2,13 @@
 
 namespace Astrotomic\FogTradeSdk;
 
-use Astrotomic\FogTradeSdk\Collections\AppealCollection;
-use Astrotomic\FogTradeSdk\Collections\ReportCollection;
 use Astrotomic\FogTradeSdk\Requests\GetAppealsRequest;
 use Astrotomic\FogTradeSdk\Requests\GetReportsRequest;
 use Astrotomic\FogTradeSdk\Responses\FogTradeResponse;
 use Sammyjo20\Saloon\Http\SaloonConnector;
 use Sammyjo20\Saloon\Traits\Plugins\AcceptsJson;
 use Sammyjo20\Saloon\Traits\Plugins\AlwaysThrowsOnErrors;
+use Spatie\LaravelData\DataCollection;
 
 class FogTradeConnector extends SaloonConnector
 {
@@ -28,7 +27,7 @@ class FogTradeConnector extends SaloonConnector
         array $selectedStates,
         int $start = 0,
         int $length = 20,
-    ): ReportCollection {
+    ): DataCollection {
         return $this->send(
             new GetReportsRequest($archived, $selectedStates, $start, $length)
         )->dto();
@@ -39,7 +38,7 @@ class FogTradeConnector extends SaloonConnector
         array $selectedStates,
         int $start = 0,
         int $length = 20,
-    ): AppealCollection {
+    ): DataCollection {
         return $this->send(
             new GetAppealsRequest($archived, $selectedStates, $start, $length)
         )->dto();
