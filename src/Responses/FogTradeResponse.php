@@ -5,9 +5,9 @@ namespace Astrotomic\FogTradeSdk\Responses;
 use Astrotomic\FogTradeSdk\Exceptions\BadResponseException;
 use Astrotomic\FogTradeSdk\Exceptions\ClientException;
 use Astrotomic\FogTradeSdk\Exceptions\ServerException;
-use Sammyjo20\Saloon\Http\SaloonResponse;
+use Saloon\Http\Response;
 
-class FogTradeResponse extends SaloonResponse
+class FogTradeResponse extends Response
 {
     public function toException(): ?BadResponseException
     {

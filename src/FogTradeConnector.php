@@ -5,19 +5,19 @@ namespace Astrotomic\FogTradeSdk;
 use Astrotomic\FogTradeSdk\Requests\GetAppealsRequest;
 use Astrotomic\FogTradeSdk\Requests\GetReportsRequest;
 use Astrotomic\FogTradeSdk\Responses\FogTradeResponse;
-use Sammyjo20\Saloon\Http\SaloonConnector;
-use Sammyjo20\Saloon\Traits\Plugins\AcceptsJson;
-use Sammyjo20\Saloon\Traits\Plugins\AlwaysThrowsOnErrors;
+use Saloon\Http\Connector;
+use Saloon\Traits\Plugins\AcceptsJson;
+use Saloon\Traits\Plugins\AlwaysThrowOnErrors;
 use Spatie\LaravelData\DataCollection;
 
-class FogTradeConnector extends SaloonConnector
+class FogTradeConnector extends Connector
 {
     use AcceptsJson;
-    use AlwaysThrowsOnErrors;
+    use AlwaysThrowOnErrors;
 
     protected ?string $response = FogTradeResponse::class;
 
-    public function defineBaseUrl(): string
+    public function resolveBaseUrl(): string
     {
         return 'https://f-o-g.trade';
     }

@@ -4,16 +4,17 @@ namespace Astrotomic\FogTradeSdk\Requests;
 
 use Astrotomic\FogTradeSdk\Data\Report;
 use Astrotomic\FogTradeSdk\Enums\ReportState;
-use Sammyjo20\Saloon\Http\SaloonRequest;
-use Sammyjo20\Saloon\Http\SaloonResponse;
-use Sammyjo20\Saloon\Traits\Plugins\CastsToDto;
+use Saloon\Contracts\Response;
+use Saloon\Enums\Method;
+use Saloon\Http\Request;
+use Saloon\Traits\Request\CastDtoFromResponse;
 use Spatie\LaravelData\DataCollection;
 
-class GetReportsRequest extends SaloonRequest
+class GetReportsRequest extends Request
 {
-    use CastsToDto;
+    use CastDtoFromResponse;
 
-    protected ?string $method = 'GET';
+    protected Method $method = Method::GET;
 
     public function __construct(
         public readonly bool $archived,
@@ -23,7 +24,7 @@ class GetReportsRequest extends SaloonRequest
     ) {
     }
 
-    public function defineEndpoint(): string
+    public function resolveEndpoint(): string
     {
         return '/reports/processData';
     }
@@ -41,7 +42,7 @@ class GetReportsRequest extends SaloonRequest
         ];
     }
 
-    protected function castToDto(SaloonResponse $response): DataCollection
+    public function createDtoFromResponse(Response $response): DataCollection
     {
         return new DataCollection(Report::class, $response->json('data'));
     }
