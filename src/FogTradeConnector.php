@@ -4,43 +4,59 @@ namespace Astrotomic\FogTradeSdk;
 
 use Astrotomic\FogTradeSdk\Requests\GetAppealsRequest;
 use Astrotomic\FogTradeSdk\Requests\GetReportsRequest;
-use Astrotomic\FogTradeSdk\Responses\FogTradeResponse;
+use Illuminate\Support\LazyCollection;
+use Saloon\Contracts\HasPagination;
+use Saloon\Contracts\Paginator;
+use Saloon\Contracts\Request;
 use Saloon\Http\Connector;
+use Saloon\Http\Paginators\OffsetPaginator;
+use Saloon\Http\Response;
 use Saloon\Traits\Plugins\AcceptsJson;
 use Saloon\Traits\Plugins\AlwaysThrowOnErrors;
 use Spatie\LaravelData\DataCollection;
 
-class FogTradeConnector extends Connector
+class FogTradeConnector extends Connector implements HasPagination
 {
     use AcceptsJson;
     use AlwaysThrowOnErrors;
-
-    protected ?string $response = FogTradeResponse::class;
 
     public function resolveBaseUrl(): string
     {
         return 'https://f-o-g.trade';
     }
 
-    public function getReports(
-        bool $archived,
+    public function appeals(
         array $selectedStates,
-        int $start = 0,
-        int $length = 20,
-    ): DataCollection {
-        return $this->send(
-            new GetReportsRequest($archived, $selectedStates, $start, $length)
-        )->dto();
+        bool $archived = true,
+    ): LazyCollection {
+        return $this->paginate(new GetAppealsRequest($archived, $selectedStates))
+            ->collect()
+            ->map(fn (Response $response): DataCollection => $response->dto())
+            ->collapse();
     }
 
-    public function getAppeals(
-        bool $archived,
+    public function reports(
         array $selectedStates,
-        int $start = 0,
-        int $length = 20,
-    ): DataCollection {
-        return $this->send(
-            new GetAppealsRequest($archived, $selectedStates, $start, $length)
-        )->dto();
+        bool $archived = true,
+    ): LazyCollection {
+        return $this->paginate(new GetReportsRequest($archived, $selectedStates))
+            ->collect()
+            ->map(fn (Response $response): DataCollection => $response->dto())
+            ->collapse();
+    }
+
+    public function paginate(Request $request, mixed ...$additionalArguments): Paginator
+    {
+        $paginator = new OffsetPaginator(
+            connector: $this,
+            originalRequest: $request,
+            limit: 100,
+        );
+
+        $paginator->setLimitKeyName('length');
+        $paginator->setOffsetKeyName('start');
+        $paginator->setTotalKeyName('recordsTotal');
+
+        return $paginator;
     }
 }

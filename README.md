@@ -20,16 +20,14 @@ composer require astrotomic/fog-trade-sdk
 ```php
 $fog = app(\Astrotomic\FogTradeSdk\FogTradeConnector::class);
 
-$fog->getReports(
+$fog->appeals(
+    selectedStates: [\Astrotomic\FogTradeSdk\Enums\AppealState::Archived],
     archived: true,
-    selectedStates: [\Astrotomic\FogTradeSdk\Enums\ReportState::Archived],
-    length: 50,
 );
 
-$fog->getAppeals(
+$fog->reports(
+    selectedStates: [\Astrotomic\FogTradeSdk\Enums\ReportState::Archived],
     archived: true,
-    selectedStates: [\Astrotomic\FogTradeSdk\Enums\AppealState::Archived],
-    length: 50,
 );
 ```
 
