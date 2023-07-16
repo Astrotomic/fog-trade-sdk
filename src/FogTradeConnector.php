@@ -4,6 +4,7 @@ namespace Astrotomic\FogTradeSdk;
 
 use Astrotomic\FogTradeSdk\Requests\GetAppealsRequest;
 use Astrotomic\FogTradeSdk\Requests\GetReportsRequest;
+use Illuminate\Support\Collection;
 use Illuminate\Support\LazyCollection;
 use Saloon\Contracts\HasPagination;
 use Saloon\Contracts\Paginator;
@@ -31,7 +32,7 @@ class FogTradeConnector extends Connector implements HasPagination
     ): LazyCollection {
         return $this->paginate(new GetAppealsRequest($archived, $selectedStates))
             ->collect()
-            ->map(fn (Response $response): DataCollection => $response->dto())
+            ->map(fn (Response $response): Collection => $response->dto()->toCollection())
             ->collapse();
     }
 
@@ -41,7 +42,7 @@ class FogTradeConnector extends Connector implements HasPagination
     ): LazyCollection {
         return $this->paginate(new GetReportsRequest($archived, $selectedStates))
             ->collect()
-            ->map(fn (Response $response): DataCollection => $response->dto())
+            ->map(fn (Response $response): Collection => $response->dto()->toCollection())
             ->collapse();
     }
 
