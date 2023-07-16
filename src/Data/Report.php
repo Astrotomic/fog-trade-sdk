@@ -63,12 +63,13 @@ final class Report extends Data
 
     public function evidences(): array
     {
-        preg_match_all('/https?\:\/\/[^\",\s]+/i', $this->evidence, $match);
+        preg_match_all('/https?\:\/\/[^\,\s]+/i', $this->evidence, $match);
 
         return collect($match)
             ->flatten()
             ->map(fn (string $url) => trim(str_replace("\xE2\x80\x8B", '', $url)))
             ->unique()
+            ->filter(fn(string $url) => filter_var($url, FILTER_VALIDATE_URL))
             ->values()
             ->all();
     }
