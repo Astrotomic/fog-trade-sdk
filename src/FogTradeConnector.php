@@ -14,7 +14,6 @@ use Saloon\Http\Paginators\OffsetPaginator;
 use Saloon\Http\Response;
 use Saloon\Traits\Plugins\AcceptsJson;
 use Saloon\Traits\Plugins\AlwaysThrowOnErrors;
-use Spatie\LaravelData\DataCollection;
 
 class FogTradeConnector extends Connector implements HasPagination
 {

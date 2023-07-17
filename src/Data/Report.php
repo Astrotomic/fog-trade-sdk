@@ -4,6 +4,7 @@ namespace Astrotomic\FogTradeSdk\Data;
 
 use Astrotomic\FogTradeSdk\Enums\ReportState;
 use Carbon\CarbonImmutable;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Spatie\LaravelData\Attributes\WithCast;
 use Spatie\LaravelData\Casts\DateTimeInterfaceCast;
@@ -61,7 +62,7 @@ final class Report extends Data
         return rescue(fn () => new SteamID($steamid));
     }
 
-    public function evidences(): array
+    public function evidences(): Collection
     {
         preg_match_all('/https?\:\/\/[^\,\s]+/i', $this->evidence, $match);
 
@@ -70,7 +71,6 @@ final class Report extends Data
             ->map(fn (string $url) => trim(str_replace("\xE2\x80\x8B", '', $url)))
             ->unique()
             ->filter(fn (string $url) => filter_var($url, FILTER_VALIDATE_URL))
-            ->values()
-            ->all();
+            ->values();
     }
 }
