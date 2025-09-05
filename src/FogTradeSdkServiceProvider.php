@@ -9,7 +9,7 @@ class FogTradeSdkServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(FogTradeConnector::class, function (): FogTradeConnector {
-            return new FogTradeConnector();
+            return new FogTradeConnector;
         });
     }
 }

@@ -34,8 +34,7 @@ final class Appeal extends Data
         public readonly string $state,
         public readonly string $assignee,
         public readonly string $last_reply,
-    ) {
-    }
+    ) {}
 
     public function state(): AppealState
     {

@@ -21,8 +21,7 @@ class GetReportsRequest extends Request
         public readonly array $selectedStates,
         public readonly int $start = 0,
         public readonly int $length = 20,
-    ) {
-    }
+    ) {}
 
     public function resolveEndpoint(): string
     {

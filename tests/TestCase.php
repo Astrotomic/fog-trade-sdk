@@ -33,7 +33,7 @@ abstract class TestCase extends Orchestra
             },
         ]);
 
-        $this->fog = new FogTradeConnector();
+        $this->fog = new FogTradeConnector;
     }
 
     protected function getPackageProviders($app): array
