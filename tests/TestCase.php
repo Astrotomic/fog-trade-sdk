@@ -6,7 +6,6 @@ use Astrotomic\FogTradeSdk\FogTradeConnector;
 use Astrotomic\FogTradeSdk\FogTradeSdkServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Saloon\Http\Faking\Fixture;
-use Saloon\Http\Faking\MockResponse;
 use Saloon\Http\PendingRequest;
 use Saloon\Laravel\Facades\Saloon;
 
