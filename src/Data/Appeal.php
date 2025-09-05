@@ -3,13 +3,13 @@
 namespace Astrotomic\FogTradeSdk\Data;
 
 use Astrotomic\FogTradeSdk\Enums\AppealState;
+use Astrotomic\SteamSdk\SteamID;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Spatie\LaravelData\Attributes\WithCast;
 use Spatie\LaravelData\Casts\DateTimeInterfaceCast;
 use Spatie\LaravelData\Data;
-use SteamID;
 use Symfony\Component\DomCrawler\Crawler;
 
 final class Appeal extends Data

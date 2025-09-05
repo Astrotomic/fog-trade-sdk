@@ -23,13 +23,13 @@
     "require": {
         "php": "^8.1",
         "ext-json": "*",
+        "astrotomic/steam-sdk": "^2.0",
         "illuminate/support": "^9.0 || ^10.0 || ^11.0 || ^12.0",
         "saloonphp/laravel-plugin": "^3.0",
         "saloonphp/pagination-plugin": "^2.0",
         "saloonphp/saloon": "^3.0",
-        "spatie/laravel-data": "^3.7",
-        "symfony/dom-crawler": "^6.3.1 || ^7.0",
-        "xpaw/steamid": "^4.0"
+        "spatie/laravel-data": "^4.0",
+        "symfony/dom-crawler": "^6.3.1 || ^7.0"
     },
     "require-dev": {
         "astrotomic/phpunit-assertions": "^0.10.0",

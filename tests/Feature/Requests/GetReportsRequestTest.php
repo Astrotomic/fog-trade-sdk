@@ -16,8 +16,8 @@ it('returns archived reports', function (ReportState $state): void {
 
     $reports->each(function (Report $report) use ($state): void {
         Assert::assertSame($state, $report->state());
-        NullableTypeAssertions::assertIsNullableString($report->victim()?->ConvertToUInt64());
-        NullableTypeAssertions::assertIsNullableString($report->accused()?->ConvertToUInt64());
+        NullableTypeAssertions::assertIsNullableString($report->victim()?->toSteam2ID());
+        NullableTypeAssertions::assertIsNullableString($report->accused()?->toSteam2ID());
 
         foreach ($report->evidences() as $evidence) {
             UrlAssertions::assertValidLoose($evidence);

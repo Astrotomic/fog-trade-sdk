@@ -5,6 +5,7 @@ use Astrotomic\FogTradeSdk\Enums\AppealState;
 use Astrotomic\FogTradeSdk\FogTradeConnector;
 use Astrotomic\PhpunitAssertions\NullableTypeAssertions;
 use Astrotomic\PhpunitAssertions\UrlAssertions;
+use Astrotomic\SteamSdk\SteamID;
 use PHPUnit\Framework\Assert;
 
 it('returns archived appeals', function (AppealState $state): void {
@@ -16,7 +17,7 @@ it('returns archived appeals', function (AppealState $state): void {
 
     $appeals->each(function (Appeal $appeal) use ($state): void {
         Assert::assertSame($state, $appeal->state());
-        NullableTypeAssertions::assertIsNullableString($appeal->appellant()?->ConvertToUInt64());
+        NullableTypeAssertions::assertIsNullableString($appeal->appellant()?->toSteam2ID());
         Assert::assertContainsOnlyInstancesOf(SteamID::class, $appeal->alts());
 
         foreach ($appeal->evidences() as $evidence) {

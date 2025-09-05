@@ -4,6 +4,7 @@ namespace Astrotomic\FogTradeSdk\Requests;
 
 use Astrotomic\FogTradeSdk\Data\Report;
 use Astrotomic\FogTradeSdk\Enums\ReportState;
+use Illuminate\Support\Collection;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 use Saloon\Http\Response;
@@ -42,8 +43,11 @@ class GetReportsRequest extends Request implements Paginatable
         ];
     }
 
+    /**
+     * @return Collection<array-key, Report>
+     */
     public function createDtoFromResponse(Response $response): DataCollection
     {
-        return new DataCollection(Report::class, $response->json('data'));
+        return collect(Report::collect($response->json('data')));
     }
 }

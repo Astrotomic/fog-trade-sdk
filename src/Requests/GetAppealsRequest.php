@@ -4,12 +4,12 @@ namespace Astrotomic\FogTradeSdk\Requests;
 
 use Astrotomic\FogTradeSdk\Data\Appeal;
 use Astrotomic\FogTradeSdk\Enums\AppealState;
+use Illuminate\Support\Collection;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 use Saloon\Http\Response;
 use Saloon\PaginationPlugin\Contracts\Paginatable;
 use Saloon\Traits\Request\CreatesDtoFromResponse;
-use Spatie\LaravelData\DataCollection;
 
 class GetAppealsRequest extends Request implements Paginatable
 {
@@ -42,8 +42,11 @@ class GetAppealsRequest extends Request implements Paginatable
         ];
     }
 
-    public function createDtoFromResponse(Response $response): DataCollection
+    /**
+     * @return Collection<array-key, Appeal>
+     */
+    public function createDtoFromResponse(Response $response): Collection
     {
-        return new DataCollection(Appeal::class, $response->json('data'));
+        return collect(Appeal::collect($response->json('data')));
     }
 }
