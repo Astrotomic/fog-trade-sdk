@@ -26,6 +26,9 @@ class FogTradeConnector extends Connector implements HasPagination
         return 'https://f-o-g.trade';
     }
 
+    /**
+     * @return LazyCollection<array-key, Appeal>
+     */
     public function appeals(
         array $selectedStates,
         bool $archived = true,
@@ -35,6 +38,9 @@ class FogTradeConnector extends Connector implements HasPagination
             ->map(fn (array $item) => Appeal::from($item));
     }
 
+    /**
+     * @return LazyCollection<array-key, Report>
+     */
     public function reports(
         array $selectedStates,
         bool $archived = true,
