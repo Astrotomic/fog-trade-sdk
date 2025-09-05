@@ -4,15 +4,16 @@ namespace Astrotomic\FogTradeSdk\Requests;
 
 use Astrotomic\FogTradeSdk\Data\Report;
 use Astrotomic\FogTradeSdk\Enums\ReportState;
-use Saloon\Contracts\Response;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
-use Saloon\Traits\Request\CastDtoFromResponse;
+use Saloon\Http\Response;
+use Saloon\PaginationPlugin\Contracts\Paginatable;
+use Saloon\Traits\Request\CreatesDtoFromResponse;
 use Spatie\LaravelData\DataCollection;
 
-class GetReportsRequest extends Request
+class GetReportsRequest extends Request implements Paginatable
 {
-    use CastDtoFromResponse;
+    use CreatesDtoFromResponse;
 
     protected Method $method = Method::GET;
 

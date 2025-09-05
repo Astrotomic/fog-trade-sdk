@@ -29,7 +29,7 @@ abstract class TestCase extends Orchestra
                     http_build_query($request->query()->all()),
                 ]));
 
-                return MockResponse::fixture($name);
+                return new Fixture($name);
             },
         ]);
 
