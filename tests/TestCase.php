@@ -6,8 +6,8 @@ use Astrotomic\FogTradeSdk\FogTradeConnector;
 use Astrotomic\FogTradeSdk\FogTradeSdkServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Saloon\Http\Faking\Fixture;
+use Saloon\Http\Faking\MockClient;
 use Saloon\Http\PendingRequest;
-use Saloon\Laravel\Facades\Saloon;
 
 abstract class TestCase extends Orchestra
 {
@@ -19,7 +19,7 @@ abstract class TestCase extends Orchestra
     {
         parent::setUp();
 
-        Saloon::fake([
+        MockClient::global([
             FogTradeConnector::class => function (PendingRequest $request): Fixture {
                 $name = implode('/', array_filter([
                     parse_url($request->getUrl(), PHP_URL_HOST),
@@ -33,6 +33,13 @@ abstract class TestCase extends Orchestra
         ]);
 
         $this->fog = new FogTradeConnector;
+    }
+
+    protected function tearDown(): void
+    {
+        MockClient::destroyGlobal();
+
+        parent::tearDown();
     }
 
     protected function getPackageProviders($app): array
