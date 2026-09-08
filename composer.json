@@ -21,22 +21,20 @@
         }
     ],
     "require": {
-        "php": "^8.1",
+        "php": "^8.2",
         "ext-json": "*",
         "astrotomic/steam-sdk": "^2.0",
-        "illuminate/support": "^9.0 || ^10.0 || ^11.0 || ^12.0",
-        "saloonphp/laravel-plugin": "^3.0",
-        "saloonphp/pagination-plugin": "^2.0",
-        "saloonphp/saloon": "^3.0",
+        "illuminate/support": "^9.0 || ^10.0 || ^11.0 || ^12.0 || ^13.0",
+        "saloonphp/pagination-plugin": "^2.3",
+        "saloonphp/saloon": "^4.0",
         "spatie/laravel-data": "^4.0",
         "symfony/dom-crawler": "^6.3.1 || ^7.0"
     },
     "require-dev": {
         "astrotomic/phpunit-assertions": "^0.12.0",
         "laravel/pint": "^1.10.5",
-        "orchestra/testbench": "^7.0 || ^8.0 || ^9.0 || ^10.0",
-        "pestphp/pest": "^1.23.1",
-        "pestphp/pest-plugin-laravel": "^1.4"
+        "orchestra/testbench": "^7.0 || ^8.0 || ^9.0 || ^10.0 || ^11.0",
+        "pestphp/pest": "^1.23.1 || ^2.36.0 || ^3.8.4"
     },
     "autoload": {
         "psr-4": {
